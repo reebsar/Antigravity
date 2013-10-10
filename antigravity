@@ -1,0 +1,178 @@
+float x= 396;
+float y = 473;
+
+
+PFont J;
+PFont Stop;
+
+void setup() {
+  translate(width/2, height/2);
+  size(900, 700, P3D);
+  J = createFont("Verdana", 10, true);
+  smooth();
+  frameRate(15);
+  rectMode(CENTER);
+  
+ 
+}
+
+
+void draw() {
+
+  background(#00B297);
+  PlanetMars();
+  
+  Moons();
+  
+  Jeep();
+ 
+}
+
+float n=0.01;
+float p=0.03;
+
+void Jeep () {
+  
+//tires
+  fill(0);
+  noStroke();
+  rectMode(CORNER);
+  rect(x+111, y+75, 30, 70, 13);
+  rect(x-32, y+75, 30, 70, 13);
+ 
+ 
+//create antigravity if mouseclicked
+
+ if (mousePressed) {
+
+    n=n+.01;
+    p=p+.001;
+    x=x+(noise(n));
+    y=y-(noise(p));
+
+    if (x>=600) {
+      x=x-(noise(n));
+    }
+  }
+
+  
+
+  //windshield
+  stroke(3, 83, 13);
+  fill(3, 83, 13);
+  curve(x+139, y+30, x, y, x+109, y, x-30, y+30);
+  quad(x, y, x+109, y, x+114, y+50, x-5, y+50);
+  fill(2, 43, 7); //darker green Jeep hood
+
+  beginShape();
+  vertex(x-5, y+50);
+  vertex(x+114, y+50);
+  vertex(x+119, y+55);
+  vertex(x-10, y+55);
+  endShape();
+
+  //line(x-5, y+50, x-10, y+55);
+  //line(x+114, y+50, x+119, y+55);
+  noStroke();
+  fill(3, 83, 13);
+  rect(x-30, y+60, 170, 20);
+  fill(#00B297);
+  quad(x+3, y+3, x+106, y+3, x+111, y+47, x-2, y+47);
+  fill(3, 83, 13);
+
+  //tire shields
+  noStroke();
+  beginShape();
+  vertex(x-11, y+55);
+  vertex(x+120, y+55);
+  vertex(x+114, y+115);
+  vertex(x-5, y+115);
+  endShape();
+  //headlights
+  fill(180);
+  ellipse(x+10, y+70, 18, 18);
+  ellipse(x+99, y+70, 18, 18);
+  //bumper
+  line(x-22, y+105, x+131, y+105);
+  fill(180);
+  beginShape(QUADS);
+  vertex(x-22, y+105);
+  vertex(x+131, y+105);
+  vertex(x+131, y+115);
+  vertex(x-22, y+115);
+  endShape();
+  fill(3, 83, 13);
+  curve(x-2, y+30, x-22, y+105, x+131, y+105, x+111, y+30);
+  fill(180);
+  curve(x-2, y+40, x-22, y+115, x+131, y+115, x+111, y+40);
+
+  //rearview left
+
+  beginShape();
+  vertex(x-5, y+45);
+  vertex(x-19, y+45);
+  vertex(x-19, y+40);
+  vertex(x-24, y+40);
+  vertex(x-24, y+30);
+  vertex(x-9, y+30);
+  vertex(x-9, y+40);
+  vertex(x-4, y+40);
+
+  endShape();
+
+  //rearview right
+
+  beginShape();
+  vertex(x+114, y+45);
+  vertex(x+128, y+45);
+  vertex(x+128, y+40);
+  vertex(x+133, y+40);
+  vertex(x+133, y+30);
+  vertex(x+118, y+30);
+  vertex(x+118, y+40);
+  vertex(x+113, y+40);
+
+  endShape();
+
+
+  //grill
+  fill(180);
+  rect(x+21, y+75, 7, 35, 7);
+  rect(x+31, y+75, 7, 35, 7);
+  rect(x+41, y+75, 7, 35, 7);
+  rect(x+51, y+75, 7, 35, 7);
+  rect(x+61, y+75, 7, 35, 7);
+  rect(x+71, y+75, 7, 35, 7);
+  rect(x+81, y+75, 7, 35, 7);
+
+
+
+  textFont(J, 10);
+  fill(180);
+  text("Jeep", x+44, y+70);
+  //antigravity
+   
+}
+
+void PlanetMars () {
+
+  fill(#FF530D);
+  ellipse(width/2, height*1.2, 900, 500);
+  fill(#E83300);
+  ellipse(width/1.5, height*1.1, 300, 200);
+}
+
+
+void Moons () {
+  
+  fill(#FFE9AD);
+  stroke(200);
+  ellipse(150,150,150,150);
+  //tried to make a series of random moons...
+  //for (int a = 50; a < 1000; a=a+150){
+  //stroke(200);
+   // fill(#FFE9AD);
+  //  float moon = random (50,200);
+ // ellipse(a,random(30,300),moon,moon);
+ // noLoop();}
+} 
